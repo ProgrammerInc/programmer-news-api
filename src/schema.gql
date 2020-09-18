@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Article {
+  body: String
+  description: String
+  id: Int!
+  isActive: Boolean!
+  title: String!
+  url: String
+}
+
+type Feed {
+  description: String
+  id: Int!
+  isActive: Boolean!
+  title: String!
+  url: String
+}
+
+type Query {
+  article(id: Int!): Article!
+  articles: [Article!]!
+  feed(id: Int!): Feed!
+  feeds: [Feed!]!
+}
