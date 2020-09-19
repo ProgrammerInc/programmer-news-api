@@ -1,4 +1,5 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Feed } from '../feeds/models/feed.model';
 import { PrismaService } from '../prisma/prisma.service';
 import { ArticleInput } from './inputs/article.input';
 import { Article } from './models/article.model';
@@ -24,5 +25,15 @@ export class ArticlesResolver {
     return this.prismaService.article.create({
       data: { title, description, body, url, isActive, publishedAt, feed: { connect: { id: feedId } } },
     });
+  }
+
+  @ResolveField()
+  async feed(@Parent() article: Article): Promise<Feed> {
+    const { id } = article;
+
+    return this.prismaService.article.findOne({
+      where: { id },
+    })
+    .feed()
   }
 }
