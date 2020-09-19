@@ -14,8 +14,11 @@ export class ArticleInput {
   @Field({ nullable: true })
   url?: string;
 
-  @Field()
+  @Field({ defaultValue: true })
   isActive: boolean;
+
+  @Field({ nullable: true })
+  feedId?: string;
 
   @Field({ nullable: true })
   publishedAt?: Date;

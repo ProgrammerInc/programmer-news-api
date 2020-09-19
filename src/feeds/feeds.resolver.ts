@@ -18,7 +18,7 @@ export class FeedsResolver {
   }
 
   @Mutation(_returns => Feed)
-  async createFeed(@Args({ name: 'feed', type: () => FeedInput }) feed: Feed) {
+  async createFeed(@Args({ name: 'feed', type: () => FeedInput }) feed: FeedInput) {
     return this.prismaService.feed.create({
       data: { ...feed },
     });

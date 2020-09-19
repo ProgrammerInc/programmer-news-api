@@ -14,6 +14,6 @@ export class FeedInput {
   @Field({ nullable: true })
   feedType?: string;
 
-  @Field()
+  @Field({ defaultValue: true })
   isActive: boolean;
 }

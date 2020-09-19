@@ -18,7 +18,7 @@ export class ArticlesResolver {
   }
 
   @Mutation(_returns => Article)
-  async createFeed(@Args({ name: 'article', type: () => ArticleInput }) article: Article) {
+  async createFeed(@Args({ name: 'article', type: () => ArticleInput }) article: ArticleInput) {
     return this.prismaService.article.create({
       data: { ...article },
     });

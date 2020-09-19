@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Feed } from '../../feeds/models/feed.model';
 
 @ObjectType()
 export class Article {
@@ -16,6 +17,12 @@ export class Article {
 
   @Field({ nullable: true })
   url?: string;
+
+  @Field(_type => Feed)
+  feed: Feed;
+
+  @Field()
+  feedId: string;
 
   @Field()
   isActive: boolean;
