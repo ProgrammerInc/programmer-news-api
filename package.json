@@ -20,7 +20,6 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -31,7 +30,10 @@
     "prisma:down": "prisma migrate down --schema src/prisma/schema.prisma --experimental",
     "prisma:watch": "prisma generate --schema src/prisma/schema.prisma --watch",
     "prisma:studio": "prisma studio --schema src/prisma/schema.prisma",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:staged": "lint-staged",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -66,7 +68,9 @@
     "eslint": "7.7.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
+    "husky": "^4.3.0",
     "jest": "26.4.2",
+    "lint-staged": "^10.4.0",
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
     "ts-jest": "26.2.0",
@@ -74,6 +78,14 @@
     "ts-node": "9.0.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint \"{src,apps,libs,test}/**/*.ts\" --cache --fix"
   },
   "jest": {
     "moduleFileExtensions": [
