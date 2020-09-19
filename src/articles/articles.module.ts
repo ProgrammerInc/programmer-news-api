@@ -4,6 +4,6 @@ import { ArticlesResolver } from './articles.resolver';
 
 @Module({
   imports: [PrismaModule],
-  providers: [ArticlesResolver]
+  providers: [ArticlesResolver],
 })
 export class ArticlesModule {}

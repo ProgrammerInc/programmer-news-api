@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Article {
-  @Field(type => Int)
+  @Field(_type => Int)
   id: number;
 
   @Field()

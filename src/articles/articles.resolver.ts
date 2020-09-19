@@ -1,20 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
 import { PrismaService } from '../prisma/prisma.service';
 import { Article } from './models/article.model';
 
-@Resolver(of => Article)
+@Resolver(_of => Article)
 export class ArticlesResolver {
-  constructor(
-    private readonly prismaService: PrismaService,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
-  @Query(returns => Article)
+  @Query(_returns => Article)
   async article(@Args('id', { type: () => Int }) id: number) {
-    return this.prismaService.article.findOne({ where: { id }});
+    return this.prismaService.article.findOne({ where: { id } });
   }
 
-  @Query(returns => [Article])
+  @Query(_returns => [Article])
   async articles() {
     return this.prismaService.article.findMany();
   }

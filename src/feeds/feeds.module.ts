@@ -4,6 +4,6 @@ import { FeedsResolver } from './feeds.resolver';
 
 @Module({
   imports: [PrismaModule],
-  providers: [FeedsResolver]
+  providers: [FeedsResolver],
 })
 export class FeedsModule {}
