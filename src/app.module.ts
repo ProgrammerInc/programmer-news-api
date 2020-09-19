@@ -1,14 +1,12 @@
-import * as path from 'path';
-
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
-
+import * as path from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PrismaModule } from './prisma/prisma.module';
 import { ArticlesModule } from './articles/articles.module';
 import { FeedsModule } from './feeds/feeds.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [

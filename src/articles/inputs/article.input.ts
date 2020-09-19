@@ -1,10 +1,7 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 
-@ObjectType()
-export class Article {
-  @Field(_type => Int)
-  id: number;
-
+@InputType()
+export class ArticleInput {
   @Field()
   title: string;
 
@@ -20,9 +17,6 @@ export class Article {
   @Field()
   isActive: boolean;
 
-  @Field()
-  createdAt: Date;
-
-  @Field()
-  updatedAt: Date;
+  @Field({ nullable: true })
+  publishedAt?: Date;
 }

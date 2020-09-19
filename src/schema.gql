@@ -4,24 +4,46 @@
 
 type Article {
   body: String
+  createdAt: DateTime!
   description: String
   id: Int!
+  isActive: Boolean!
+  title: String!
+  updatedAt: DateTime!
+  url: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Feed {
+  createdAt: DateTime!
+  description: String
+  feedType: String
+  id: Int!
+  isActive: Boolean!
+  title: String!
+  updatedAt: DateTime!
+  url: String
+}
+
+input FeedInput {
+  description: String
+  feedType: String
   isActive: Boolean!
   title: String!
   url: String
 }
 
-type Feed {
-  description: String
-  id: Int!
-  isActive: Boolean!
-  title: String!
-  url: String
+type Mutation {
+  createFeed(feed: FeedInput!): Feed!
 }
 
 type Query {
-  article(id: Int!): Article!
-  articles: [Article!]!
-  feed(id: Int!): Feed!
-  feeds: [Feed!]!
+  getArticleById(id: Int!): Article!
+  getArticles: [Article!]!
+  getFeedById(id: Int!): Feed!
+  getFeeds: [Feed!]!
 }
