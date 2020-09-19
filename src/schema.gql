@@ -53,6 +53,10 @@ input FeedInput {
 type Mutation {
   createArticle(article: ArticleInput!): Article!
   createFeed(feed: FeedInput!): Feed!
+  deleteArticle(id: Int!): Article!
+  deleteFeed(id: Int!): Feed!
+  updateArticle(article: ArticleInput!, id: Int!): Article!
+  updateFeed(feed: FeedInput!, id: Int!): Feed!
 }
 
 type Query {

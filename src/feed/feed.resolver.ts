@@ -27,10 +27,23 @@ export class FeedResolver {
     return this.feedService.createFeed(feed);
   }
 
+  @Mutation(_returns => Feed)
+  async updateFeed(
+    @Args('id', { type: () => Int }) id: number,
+    @Args({ name: 'feed', type: () => FeedInput }) feed: FeedInput
+  ): Promise<Feed> {
+    return this.feedService.updateFeed({ where: { id }, data: feed });
+  }
+
+  @Mutation(_returns => Feed)
+  async deleteFeed(@Args('id', { type: () => Int }) id: number): Promise<Feed> {
+    return this.feedService.deleteFeed({ id });
+  }
+
   @ResolveField()
   async articles(@Parent() feed: Feed): Promise<Article[]> {
     const { id } = feed;
 
-    return this.articleService.articles({ where: { feedId: id }});
+    return this.articleService.articles({ where: { feedId: id, published: true }});
   }
 }

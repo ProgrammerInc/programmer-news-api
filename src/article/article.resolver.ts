@@ -27,6 +27,19 @@ export class ArticleResolver {
     return this.articleService.createArticle(article);
   }
 
+  @Mutation(_returns => Article)
+  async updateArticle(
+    @Args('id', { type: () => Int }) id: number,
+    @Args({ name: 'article', type: () => ArticleInput }) article: ArticleInput
+  ): Promise<Article> {
+    return this.articleService.updateArticle({ where: { id }, data: article });
+  }
+
+  @Mutation(_returns => Article)
+  async deleteArticle(@Args('id', { type: () => Int }) id: number): Promise<Article> {
+    return this.articleService.deleteArticle({ id });
+  }
+
   @ResolveField()
   async feed(@Parent() article: Article): Promise<Feed> {
     const { feedId } = article;
