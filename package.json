@@ -1,10 +1,22 @@
 {
   "name": "programmer-news-api",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Programmer News API Server",
   "private": true,
-  "license": "UNLICENSED",
+  "version": "0.1.0",
+  "author": {
+    "name": "Programmer Incorporated",
+    "email": "programmer.incorporated@gmail.com",
+    "url": "https://programmer.inc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProgrammerInc/programmer-news-api.git"
+  },
+  "license": "MIT",
+  "homepage": "https://programmer.news",
+  "bugs": {
+    "url": "https://github.com/ProgrammerInc/programmer-news-api/issues"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -13,6 +25,12 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
+    "prisma:gen": "prisma generate --schema src/prisma/schema.prisma",
+    "prisma:save": "prisma migrate save --schema src/prisma/schema.prisma --experimental",
+    "prisma:up": "prisma migrate up --schema src/prisma/schema.prisma --experimental",
+    "prisma:down": "prisma migrate down --schema src/prisma/schema.prisma --experimental",
+    "prisma:watch": "prisma generate --schema src/prisma/schema.prisma --watch",
+    "prisma:studio": "prisma studio --schema src/prisma/schema.prisma",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -70,5 +88,13 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "keywords": [
+    "programmer inc",
+    "programmer",
+    "incorporated",
+    "news",
+    "api",
+    "server"
+  ]
 }
