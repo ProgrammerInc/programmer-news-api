@@ -1,5 +1,5 @@
 {
-  "name": "programmer-news-api",
+  "name": "programmer-news-api-server",
   "description": "Programmer News API Server",
   "private": true,
   "version": "0.1.0",
@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ProgrammerInc/programmer-news-api.git"
+    "url": "git+https://github.com/ProgrammerInc/programmer-news-api-server.git"
   },
   "license": "MIT",
   "homepage": "https://programmer.news",
   "bugs": {
-    "url": "https://github.com/ProgrammerInc/programmer-news-api/issues"
+    "url": "https://github.com/ProgrammerInc/programmer-news-api-server/issues"
   },
   "scripts": {
     "prebuild": "rimraf dist",
