@@ -4,8 +4,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import * as path from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ArticlesModule } from './articles/articles.module';
-import { FeedsModule } from './feeds/feeds.module';
+import { ArticleModule } from './article/article.module';
+import { FeedModule } from './feed/feed.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
@@ -18,8 +18,8 @@ import { PrismaModule } from './prisma/prisma.module';
       playground: true,
     }),
     PrismaModule,
-    ArticlesModule,
-    FeedsModule,
+    ArticleModule,
+    FeedModule,
   ],
   controllers: [AppController],
   providers: [AppService],

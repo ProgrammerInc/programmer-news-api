@@ -15,5 +15,5 @@ export class FeedInput {
   feedType?: string;
 
   @Field({ defaultValue: true })
-  isActive: boolean;
+  published: boolean;
 }

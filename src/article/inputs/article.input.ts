@@ -15,7 +15,7 @@ export class ArticleInput {
   url?: string;
 
   @Field({ defaultValue: true })
-  isActive: boolean;
+  published: boolean;
 
   @Field(_type => Int)
   feedId: number;

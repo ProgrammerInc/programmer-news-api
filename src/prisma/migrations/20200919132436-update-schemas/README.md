@@ -12,7 +12,7 @@ CREATE TABLE "public"."Article" (
 "description" text   ,
 "body" text   ,
 "url" text   ,
-"isActive" boolean   NOT NULL DEFAULT true,
+"published" boolean   NOT NULL DEFAULT true,
 "feedId" integer   ,
 "publishedAt" timestamp(3)   NOT NULL DEFAULT CURRENT_TIMESTAMP,
 "createdAt" timestamp(3)   NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -26,7 +26,7 @@ CREATE TABLE "public"."Feed" (
 "description" text   ,
 "url" text   ,
 "feedType" text   ,
-"isActive" boolean   NOT NULL DEFAULT true,
+"published" boolean   NOT NULL DEFAULT true,
 "createdAt" timestamp(3)   NOT NULL DEFAULT CURRENT_TIMESTAMP,
 "updatedAt" timestamp(3)   NOT NULL ,
 PRIMARY KEY ("id")
@@ -59,11 +59,11 @@ migration 20200918101252-initial..20200919132436-update-schemas
 -  description   String
 -  body          String
 -  url           String
--  isActive      Boolean
+-  published      Boolean
 +  description   String?
 +  body          String?
 +  url           String?
-+  isActive      Boolean   @default(true)
++  published      Boolean   @default(true)
 +  feed          Feed?     @relation(fields: [feedId], references: [id])
 +  feedId        Int?
 +  publishedAt   DateTime  @default(now())
@@ -76,11 +76,11 @@ migration 20200918101252-initial..20200919132436-update-schemas
    title         String
 -  description   String
 -  url           String
--  isActive      Boolean
+-  published      Boolean
 +  description   String?
 +  url           String?
 +  feedType      String?
-+  isActive      Boolean   @default(true)
++  published      Boolean   @default(true)
 +  articles      Article[]
 +  createdAt     DateTime  @default(now())
 +  updatedAt     DateTime  @updatedAt

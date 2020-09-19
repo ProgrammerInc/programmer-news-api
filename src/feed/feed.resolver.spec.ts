@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FeedsResolver } from './feeds.resolver';
+import { FeedResolver } from './feed.resolver';
 
-describe('FeedsResolver', () => {
-  let resolver: FeedsResolver;
+describe('FeedResolver', () => {
+  let resolver: FeedResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [FeedsResolver],
+      providers: [FeedResolver],
     }).compile();
 
-    resolver = module.get<FeedsResolver>(FeedsResolver);
+    resolver = module.get<FeedResolver>(FeedResolver);
   });
 
   it('should be defined', () => {

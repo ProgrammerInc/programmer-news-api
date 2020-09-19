@@ -12,7 +12,7 @@ CREATE TABLE "public"."Article" (
 "description" text   NOT NULL ,
 "body" text   NOT NULL ,
 "url" text   NOT NULL ,
-"isActive" boolean   NOT NULL ,
+"published" boolean   NOT NULL ,
 PRIMARY KEY ("id")
 )
 
@@ -21,7 +21,7 @@ CREATE TABLE "public"."Feed" (
 "title" text   NOT NULL ,
 "description" text   NOT NULL ,
 "url" text   NOT NULL ,
-"isActive" boolean   NOT NULL ,
+"published" boolean   NOT NULL ,
 PRIMARY KEY ("id")
 )
 ```
@@ -52,7 +52,7 @@ migration ..20200918101252-initial
 +  description   String
 +  body          String
 +  url           String
-+  isActive      Boolean
++  published      Boolean
 +}
 +
 +model Feed {
@@ -60,7 +60,7 @@ migration ..20200918101252-initial
 +  title         String
 +  description   String
 +  url           String
-+  isActive      Boolean
++  published      Boolean
 +}
 ```
 

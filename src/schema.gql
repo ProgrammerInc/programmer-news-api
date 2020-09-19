@@ -7,9 +7,9 @@ type Article {
   createdAt: DateTime!
   description: String
   feed: Feed
-  feedId: Int!
+  feedId: Int
   id: Int!
-  isActive: Boolean!
+  published: Boolean!
   title: String!
   updatedAt: DateTime!
   url: String
@@ -19,7 +19,7 @@ input ArticleInput {
   body: String
   description: String
   feedId: Int!
-  isActive: Boolean = true
+  published: Boolean = true
   publishedAt: DateTime
   title: String!
   url: String
@@ -36,7 +36,7 @@ type Feed {
   description: String
   feedType: String
   id: Int!
-  isActive: Boolean!
+  published: Boolean!
   title: String!
   updatedAt: DateTime!
   url: String
@@ -45,7 +45,7 @@ type Feed {
 input FeedInput {
   description: String
   feedType: String
-  isActive: Boolean = true
+  published: Boolean = true
   title: String!
   url: String
 }

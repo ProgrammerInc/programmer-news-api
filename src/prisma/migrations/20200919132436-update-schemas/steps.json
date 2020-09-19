@@ -160,7 +160,7 @@
         "path": {
           "tag": "Field",
           "model": "Article",
-          "field": "isActive"
+          "field": "published"
         },
         "directive": "default"
       }
@@ -172,7 +172,7 @@
         "path": {
           "tag": "Field",
           "model": "Article",
-          "field": "isActive"
+          "field": "published"
         },
         "directive": "default"
       },
@@ -261,7 +261,7 @@
         "path": {
           "tag": "Field",
           "model": "Feed",
-          "field": "isActive"
+          "field": "published"
         },
         "directive": "default"
       }
@@ -273,7 +273,7 @@
         "path": {
           "tag": "Field",
           "model": "Feed",
-          "field": "isActive"
+          "field": "published"
         },
         "directive": "default"
       },

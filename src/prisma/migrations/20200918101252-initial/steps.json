@@ -101,7 +101,7 @@
     {
       "tag": "CreateField",
       "model": "Article",
-      "field": "isActive",
+      "field": "published",
       "type": "Boolean",
       "arity": "Required"
     },
@@ -176,7 +176,7 @@
     {
       "tag": "CreateField",
       "model": "Feed",
-      "field": "isActive",
+      "field": "published",
       "type": "Boolean",
       "arity": "Required"
     }
