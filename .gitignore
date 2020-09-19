@@ -1,6 +1,9 @@
-# compiled output
+# Compiled Output
 /dist
 /node_modules
+
+# Docs
+/docs
 
 # Logs
 logs

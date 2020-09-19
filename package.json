@@ -31,6 +31,8 @@
     "prisma:watch": "prisma generate --schema src/prisma/schema.prisma --watch",
     "prisma:studio": "prisma studio --schema src/prisma/schema.prisma",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "docs": "compodoc -p tsconfig.json -d docs",
+    "docs:serve": "compodoc -p tsconfig.json -d docs -s",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",
@@ -57,6 +59,7 @@
     "rxjs": "^6.5.4"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/cli": "^7.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
