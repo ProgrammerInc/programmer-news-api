@@ -20,10 +20,13 @@ lerna-debug.log*
 /coverage
 /.nyc_output
 
+# Cache Files
+.eslintcache
+
 # Environment
 .env
 
-# IDEs and editors
+# IDEs and Editors
 /.idea
 .project
 .classpath
