@@ -8,17 +8,17 @@ export class FeedsResolver {
   constructor(private readonly prismaService: PrismaService) {}
 
   @Query(_returns => [Feed])
-  async getFeeds() {
+  async getFeeds(): Promise<Feed[]> {
     return this.prismaService.feed.findMany();
   }
 
   @Query(_returns => Feed)
-  async getFeedById(@Args('id', { type: () => Int }) id: number) {
+  async getFeedById(@Args('id', { type: () => Int }) id: number): Promise<Feed> {
     return this.prismaService.feed.findOne({ where: { id } });
   }
 
   @Mutation(_returns => Feed)
-  async createFeed(@Args({ name: 'feed', type: () => FeedInput }) feed: FeedInput) {
+  async createFeed(@Args({ name: 'feed', type: () => FeedInput }) feed: FeedInput): Promise<Feed> {
     return this.prismaService.feed.create({
       data: { ...feed },
     });

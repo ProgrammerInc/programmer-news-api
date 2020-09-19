@@ -19,10 +19,10 @@ export class Article {
   url?: string;
 
   @Field(_type => Feed)
-  feed: Feed;
+  feed?: Feed;
 
-  @Field()
-  feedId: string;
+  @Field(_type => Int)
+  feedId: number;
 
   @Field()
   isActive: boolean;

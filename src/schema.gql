@@ -6,12 +6,22 @@ type Article {
   body: String
   createdAt: DateTime!
   description: String
-  feed: Feed!
-  feedId: String!
+  feed: Feed
+  feedId: Int!
   id: Int!
   isActive: Boolean!
   title: String!
   updatedAt: DateTime!
+  url: String
+}
+
+input ArticleInput {
+  body: String
+  description: String
+  feedId: Int!
+  isActive: Boolean = true
+  publishedAt: DateTime
+  title: String!
   url: String
 }
 
@@ -21,7 +31,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Feed {
-  articles: [Article!]!
+  articles: [Article!]
   createdAt: DateTime!
   description: String
   feedType: String
@@ -41,6 +51,7 @@ input FeedInput {
 }
 
 type Mutation {
+  createArticle(article: ArticleInput!): Article!
   createFeed(feed: FeedInput!): Feed!
 }
 

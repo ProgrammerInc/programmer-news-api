@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 
 @InputType()
 export class ArticleInput {
@@ -17,8 +17,8 @@ export class ArticleInput {
   @Field({ defaultValue: true })
   isActive: boolean;
 
-  @Field({ nullable: true })
-  feedId?: string;
+  @Field(_type => Int)
+  feedId: number;
 
   @Field({ nullable: true })
   publishedAt?: Date;

@@ -22,7 +22,7 @@ export class Feed {
   isActive: boolean;
 
   @Field(_type => [Article])
-  articles: Article[];
+  articles?: Article[];
 
   @Field()
   createdAt: Date;

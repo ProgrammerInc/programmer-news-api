@@ -8,19 +8,21 @@ export class ArticlesResolver {
   constructor(private readonly prismaService: PrismaService) {}
 
   @Query(_returns => [Article])
-  async getArticles() {
+  async getArticles(): Promise<Article[]> {
     return this.prismaService.article.findMany();
   }
 
   @Query(_returns => Article)
-  async getArticleById(@Args('id', { type: () => Int }) id: number) {
+  async getArticleById(@Args('id', { type: () => Int }) id: number): Promise<Article> {
     return this.prismaService.article.findOne({ where: { id } });
   }
 
   @Mutation(_returns => Article)
-  async createFeed(@Args({ name: 'article', type: () => ArticleInput }) article: ArticleInput) {
+  async createArticle(@Args({ name: 'article', type: () => ArticleInput }) article: ArticleInput): Promise<Article> {
+    const { title, description, body, url, isActive, publishedAt, feedId } = article;
+
     return this.prismaService.article.create({
-      data: { ...article },
+      data: { title, description, body, url, isActive, publishedAt, feed: { connect: { id: feedId } } },
     });
   }
 }
