@@ -18,6 +18,7 @@
     "url": "https://github.com/ProgrammerInc/programmer-news-api-server/issues"
   },
   "scripts": {
+    "init": "npm-run-all docs prisma:gen build",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "start": "nest start",
@@ -92,6 +93,7 @@
     "jest": "26.4.2",
     "lint-staged": "^10.4.0",
     "npm-check": "^5.9.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
     "supertest": "^4.0.2",
     "ts-jest": "^26.3.0",
