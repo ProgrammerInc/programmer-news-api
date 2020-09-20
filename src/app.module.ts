@@ -3,11 +3,14 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { TerminusModule } from '@nestjs/terminus';
 import * as path from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
 import { FeedModule } from './feed/feed.module';
+import { HealthController } from './health/health.controller';
+import { HealthModule } from './health/health.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
@@ -40,16 +43,18 @@ import { PrismaModule } from './prisma/prisma.module';
       playground: true,
       installSubscriptionHandlers: true,
     }),
+    HealthModule,
     PrismaModule,
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, '..', 'docs'),
-      serveRoot: "/docs",
-      exclude: ['/graphql'],
+      serveRoot: '/docs',
+      exclude: ['/api', '/graphql', '/health'],
     }),
+    TerminusModule,
     ArticleModule,
     FeedModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [
     AppService,
   ],

@@ -1,6 +1,7 @@
 import * as Joi from '@hapi/joi';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { TerminusModule } from '@nestjs/terminus';
 import { ArticleModule } from '../article/article.module';
 import { FeedModule } from '../feed/feed.module';
 import { PrismaModule } from '../prisma/prisma.module';
@@ -24,6 +25,7 @@ import { WorkerService } from './worker.service';
       },
     }),
     PrismaModule,
+    TerminusModule,
     ArticleModule,
     FeedModule,
   ],

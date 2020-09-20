@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { EventPattern } from '@nestjs/microservices';
 import { WorkerService } from './worker.service';
 
-@Controller()
+@Controller('worker')
 export class WorkerController {
   constructor(private readonly workerService: WorkerService) {}
 
