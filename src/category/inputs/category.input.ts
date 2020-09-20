@@ -8,6 +8,9 @@ export class CategoryInput {
   @Field({ nullable: true })
   description?: string;
 
+  @Field({ nullable: true })
+  alias?: string;
+
   @Field({ defaultValue: true })
   published: boolean;
 }

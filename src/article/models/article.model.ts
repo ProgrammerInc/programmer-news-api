@@ -22,6 +22,9 @@ export class Article {
   @Field({ nullable: true })
   link?: string;
 
+  @Field({ nullable: true })
+  guid?: string;
+
   @Field((_type) => Feed)
   feed?: Feed;
 

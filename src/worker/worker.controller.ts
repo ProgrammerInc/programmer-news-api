@@ -8,7 +8,12 @@ export class WorkerController {
   constructor(private readonly workerService: WorkerService) {}
 
   @EventPattern('feed_created')
-  async handleFeedCreated(data: Feed) {
-    return this.workerService.handleFeedCreated(data);
+  async feedCreated(data: Feed) {
+    return this.workerService.feedCreated(data);
+  }
+
+  @EventPattern('update_feeds')
+  async updateFeeds(data: Feed[]) {
+    return this.workerService.updateFeeds(data);
   }
 }

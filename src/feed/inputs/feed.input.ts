@@ -12,6 +12,9 @@ export class FeedInput {
   @Field({ nullable: true })
   link?: string;
 
+  @Field({ nullable: true })
+  feedUrl?: string;
+
   @Field((_type) => FeedType, { defaultValue: FeedType.NONE })
   feedType: FeedType;
 

@@ -17,6 +17,7 @@ model Article {
   content       String?
   author        String?
   link          String?
+  guid          String?   @unique
   published     Boolean   @default(true)
   feed          Feed?     @relation(fields: [feedId], references: [id])
   feedId        Int?
@@ -30,6 +31,7 @@ model Category {
   id            Int       @default(autoincrement()) @id
   name          String
   description   String?
+  alias         String?   @unique
   published     Boolean   @default(true)
   articles      Article[]
   createdAt     DateTime  @default(now())
@@ -41,7 +43,9 @@ model Feed {
   title         String
   description   String?
   link          String?
+  feedUrl       String?
   feedType      FeedType  @default(NONE)
+  guid          String?   @unique
   published     Boolean   @default(true)
   articles      Article[]
   createdAt     DateTime  @default(now())

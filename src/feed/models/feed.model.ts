@@ -16,6 +16,9 @@ export class Feed {
   link?: string;
 
   @Field({ nullable: true })
+  feedUrl?: string;
+
+  @Field({ nullable: true })
   feedType?: string;
 
   @Field()

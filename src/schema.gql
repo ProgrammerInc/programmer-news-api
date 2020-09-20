@@ -10,6 +10,7 @@ type Article {
   description: String
   feed: Feed
   feedId: Int
+  guid: String
   id: Int!
   link: String
   published: Boolean!
@@ -22,6 +23,7 @@ input ArticleInput {
   content: String
   description: String
   feedId: Int!
+  guid: String
   link: String
   published: Boolean = true
   publishedAt: DateTime
@@ -29,6 +31,7 @@ input ArticleInput {
 }
 
 type Category {
+  alias: String
   articles: [Article!]
   createdAt: DateTime!
   description: String
@@ -39,6 +42,7 @@ type Category {
 }
 
 input CategoryInput {
+  alias: String
   description: String
   name: String!
   published: Boolean = true
@@ -54,6 +58,7 @@ type Feed {
   createdAt: DateTime!
   description: String
   feedType: String
+  feedUrl: String
   id: Int!
   link: String
   published: Boolean!
@@ -64,6 +69,7 @@ type Feed {
 input FeedInput {
   description: String
   feedType: FeedType = NONE
+  feedUrl: String
   link: String
   published: Boolean = true
   title: String!

@@ -17,6 +17,9 @@ export class ArticleInput {
   @Field({ nullable: true })
   link?: string;
 
+  @Field({ nullable: true })
+  guid?: string;
+
   @Field({ defaultValue: true })
   published: boolean;
 

@@ -117,6 +117,24 @@
     {
       "tag": "CreateField",
       "model": "Article",
+      "field": "guid",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Article",
+          "field": "guid"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Article",
       "field": "published",
       "type": "Boolean",
       "arity": "Required"
@@ -352,6 +370,24 @@
     {
       "tag": "CreateField",
       "model": "Category",
+      "field": "alias",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Category",
+          "field": "alias"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Category",
       "field": "published",
       "type": "Boolean",
       "arity": "Required"
@@ -509,6 +545,13 @@
     {
       "tag": "CreateField",
       "model": "Feed",
+      "field": "feedUrl",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Feed",
       "field": "feedType",
       "type": "FeedType",
       "arity": "Required"
@@ -537,6 +580,24 @@
       },
       "argument": "",
       "value": "NONE"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Feed",
+      "field": "guid",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Feed",
+          "field": "guid"
+        },
+        "directive": "unique"
+      }
     },
     {
       "tag": "CreateField",
