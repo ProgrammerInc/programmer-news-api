@@ -16,12 +16,15 @@ import { PrismaModule } from './prisma/prisma.module';
       sortSchema: true,
       debug: false,
       playground: true,
+      installSubscriptionHandlers: true,
     }),
     PrismaModule,
     ArticleModule,
     FeedModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+  ],
 })
 export class AppModule {}

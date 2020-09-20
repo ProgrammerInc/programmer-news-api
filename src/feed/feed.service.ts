@@ -1,10 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { Feed, FeedCreateInput, FeedOrderByInput, FeedUpdateInput, FeedWhereInput, FeedWhereUniqueInput } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class FeedService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(
+    @Inject('NEWS_FEED_WORKER') private workerClient: ClientProxy,
+    private prismaService: PrismaService,
+  ) {}
+
+  async onApplicationBootstrap() {
+    await this.workerClient.connect();
+  }
 
   async feed(userWhereUniqueInput: FeedWhereUniqueInput): Promise<Feed | null> {
     return this.prismaService.feed.findOne({
@@ -30,9 +38,13 @@ export class FeedService {
   }
 
   async createFeed(data: FeedCreateInput): Promise<Feed> {
-    return this.prismaService.feed.create({
+    const feed = await this.prismaService.feed.create({
       data,
     });
+
+    this.workerClient.emit<number>('feed_created', feed);
+
+    return feed;
   }
 
   async updateFeed(params: {
