@@ -44,10 +44,16 @@ type Feed {
 
 input FeedInput {
   description: String
-  feedType: String
+  feedType: FeedType = NONE
   published: Boolean = true
   title: String!
   url: String
+}
+
+enum FeedType {
+  ATOM
+  NONE
+  RSS
 }
 
 type Mutation {

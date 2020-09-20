@@ -3,7 +3,7 @@ import { Article } from '../../article/models/article.model';
 
 @ObjectType()
 export class Feed {
-  @Field(_type => Int)
+  @Field((_type) => Int)
   id: number;
 
   @Field()
@@ -21,7 +21,7 @@ export class Feed {
   @Field()
   published: boolean;
 
-  @Field(_type => [Article])
+  @Field((_type) => [Article])
   articles?: Article[];
 
   @Field()

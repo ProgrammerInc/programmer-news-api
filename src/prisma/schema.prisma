@@ -29,9 +29,15 @@ model Feed {
   title         String
   description   String?
   url           String?
-  feedType      String?
+  feedType      FeedType  @default(NONE)
   published     Boolean   @default(true)
   articles      Article[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+}
+
+enum FeedType {
+  ATOM
+  RSS
+  NONE
 }

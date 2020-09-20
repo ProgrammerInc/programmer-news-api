@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { FeedType } from '../enums/feed-type.enum';
 
 @InputType()
 export class FeedInput {
@@ -11,8 +12,8 @@ export class FeedInput {
   @Field({ nullable: true })
   url?: string;
 
-  @Field({ nullable: true })
-  feedType?: string;
+  @Field((_type) => FeedType, { defaultValue: FeedType.NONE })
+  feedType: FeedType;
 
   @Field({ defaultValue: true })
   published: boolean;
