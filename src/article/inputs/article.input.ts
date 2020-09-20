@@ -9,15 +9,18 @@ export class ArticleInput {
   description?: string;
 
   @Field({ nullable: true })
-  body?: string;
+  content?: string;
 
   @Field({ nullable: true })
-  url?: string;
+  author?: string;
+
+  @Field({ nullable: true })
+  link?: string;
 
   @Field({ defaultValue: true })
   published: boolean;
 
-  @Field(_type => Int)
+  @Field((_type) => Int)
   feedId: number;
 
   @Field({ nullable: true })

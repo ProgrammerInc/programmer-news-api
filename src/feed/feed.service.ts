@@ -1,6 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { Feed, FeedCreateInput, FeedOrderByInput, FeedUpdateInput, FeedWhereInput, FeedWhereUniqueInput } from '@prisma/client';
+import {
+  Article,
+  Feed,
+  FeedCreateInput,
+  FeedOrderByInput,
+  FeedUpdateInput,
+  FeedWhereInput,
+  FeedWhereUniqueInput,
+} from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -62,5 +70,15 @@ export class FeedService {
     return this.prismaService.feed.delete({
       where,
     });
+  }
+
+  async articles(
+    userWhereUniqueInput: FeedWhereUniqueInput,
+  ): Promise<Article[] | null> {
+    return this.prismaService.feed
+      .findOne({
+        where: userWhereUniqueInput,
+      })
+      .articles();
   }
 }

@@ -1,9 +1,10 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Category } from '../../category/models/category.model';
 import { Feed } from '../../feed/models/feed.model';
 
 @ObjectType()
 export class Article {
-  @Field(_type => Int)
+  @Field((_type) => Int)
   id: number;
 
   @Field()
@@ -13,19 +14,25 @@ export class Article {
   description?: string;
 
   @Field({ nullable: true })
-  body?: string;
+  content?: string;
 
   @Field({ nullable: true })
-  url?: string;
+  author?: string;
 
-  @Field(_type => Feed)
+  @Field({ nullable: true })
+  link?: string;
+
+  @Field((_type) => Feed)
   feed?: Feed;
 
-  @Field(_type => Int)
+  @Field((_type) => Int)
   feedId?: number;
 
   @Field()
   published: boolean;
+
+  @Field((_type) => [Category])
+  categories?: Category[];
 
   @Field()
   createdAt: Date;

@@ -7,11 +7,11 @@ export class WorkerService {
   async handleFeedCreated(data: Feed) {
     const parser = new Parser();
 
-    const feed = await parser.parseURL(data.url);
-    console.log(feed.title);
+    const feed = await parser.parseURL(data.link);
+    console.log(feed);
 
-    feed.items.forEach(item => {
-      console.log(item.title + ':' + item.link)
+    feed.items.forEach((item) => {
+      console.log(item);
     });
   }
 }

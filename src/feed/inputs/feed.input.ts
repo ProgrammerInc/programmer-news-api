@@ -10,7 +10,7 @@ export class FeedInput {
   description?: string;
 
   @Field({ nullable: true })
-  url?: string;
+  link?: string;
 
   @Field((_type) => FeedType, { defaultValue: FeedType.NONE })
   feedType: FeedType;

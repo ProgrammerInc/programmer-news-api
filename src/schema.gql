@@ -3,26 +3,45 @@
 # ------------------------------------------------------
 
 type Article {
-  body: String
+  author: String
+  categories: [Category!]
+  content: String
   createdAt: DateTime!
   description: String
   feed: Feed
   feedId: Int
   id: Int!
+  link: String
   published: Boolean!
   title: String!
   updatedAt: DateTime!
-  url: String
 }
 
 input ArticleInput {
-  body: String
+  author: String
+  content: String
   description: String
   feedId: Int!
+  link: String
   published: Boolean = true
   publishedAt: DateTime
   title: String!
-  url: String
+}
+
+type Category {
+  articles: [Article!]
+  createdAt: DateTime!
+  description: String
+  id: Int!
+  name: String!
+  published: Boolean!
+  updatedAt: DateTime!
+}
+
+input CategoryInput {
+  description: String
+  name: String!
+  published: Boolean = true
 }
 
 """
@@ -36,18 +55,18 @@ type Feed {
   description: String
   feedType: String
   id: Int!
+  link: String
   published: Boolean!
   title: String!
   updatedAt: DateTime!
-  url: String
 }
 
 input FeedInput {
   description: String
   feedType: FeedType = NONE
+  link: String
   published: Boolean = true
   title: String!
-  url: String
 }
 
 enum FeedType {
@@ -58,16 +77,21 @@ enum FeedType {
 
 type Mutation {
   createArticle(article: ArticleInput!): Article!
+  createCategory(category: CategoryInput!): Category!
   createFeed(feed: FeedInput!): Feed!
   deleteArticle(id: Int!): Article!
+  deleteCategory(id: Int!): Category!
   deleteFeed(id: Int!): Feed!
   updateArticle(article: ArticleInput!, id: Int!): Article!
+  updateCategory(category: CategoryInput!, id: Int!): Category!
   updateFeed(feed: FeedInput!, id: Int!): Feed!
 }
 
 type Query {
   getArticleById(id: Int!): Article!
   getArticles: [Article!]!
+  getCategoryById(id: Int!): Category!
+  getCategorys: [Category!]!
   getFeedById(id: Int!): Feed!
   getFeeds: [Feed!]!
 }

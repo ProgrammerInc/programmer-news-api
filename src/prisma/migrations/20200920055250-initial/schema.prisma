@@ -14,12 +14,24 @@ model Article {
   id            Int       @default(autoincrement()) @id
   title         String
   description   String?
-  body          String?
-  url           String?
-  published      Boolean   @default(true)
+  content       String?
+  author        String?
+  link          String?
+  published     Boolean   @default(true)
   feed          Feed?     @relation(fields: [feedId], references: [id])
   feedId        Int?
+  categories    Category[]
   publishedAt   DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Category {
+  id            Int       @default(autoincrement()) @id
+  name          String
+  description   String?
+  published     Boolean   @default(true)
+  articles      Article[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
@@ -28,10 +40,16 @@ model Feed {
   id            Int       @default(autoincrement()) @id
   title         String
   description   String?
-  url           String?
-  feedType      String?
-  published      Boolean   @default(true)
+  link          String?
+  feedType      FeedType  @default(NONE)
+  published     Boolean   @default(true)
   articles      Article[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+}
+
+enum FeedType {
+  ATOM
+  RSS
+  NONE
 }

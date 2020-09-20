@@ -2,23 +2,17 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Article } from '../../article/models/article.model';
 
 @ObjectType()
-export class Feed {
+export class Category {
   @Field((_type) => Int)
   id: number;
 
   @Field()
-  title: string;
+  name: string;
 
   @Field({ nullable: true })
   description?: string;
 
-  @Field({ nullable: true })
-  link?: string;
-
-  @Field({ nullable: true })
-  feedType?: string;
-
-  @Field()
+  @Field({ defaultValue: true })
   published: boolean;
 
   @Field((_type) => [Article])
