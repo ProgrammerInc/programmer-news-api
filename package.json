@@ -1,5 +1,5 @@
 {
-  "name": "programmer-news-api-server",
+  "name": "@programmer/news-api",
   "description": "Programmer News API Server",
   "private": true,
   "version": "0.1.0",
@@ -56,6 +56,7 @@
     "apollo-server-express": "^2.17.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
+    "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "graphql-tools": "^6.2.3",
     "redis": "^3.0.2",

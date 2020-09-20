@@ -13,7 +13,7 @@ import { FeedService } from './feed.service';
         name: 'NEWS_FEED_WORKER',
         transport: Transport.REDIS,
         options: {
-          url: 'redis://localhost:6379',
+          url: process.env.REDIS_URL || 'redis://localhost:6379',
         }
       },
     ]),
