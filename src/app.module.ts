@@ -1,3 +1,4 @@
+import * as Joi from '@hapi/joi';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -10,7 +11,20 @@ import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      validationSchema: Joi.object({
+        NODE_ENV: Joi.string()
+          .valid('development', 'production', 'test', 'provision')
+          .default('development'),
+        PORT: Joi.number().default(3000),
+        DATABASE_URL: Joi.string().default('postgresql://postgres@localhost:5432/programmer-news?schema=public'),
+        REDIS_URL: Joi.string().default('redis://localhost:6379'),
+      }),
+      validationOptions: {
+        allowUnknown: true,
+        abortEarly: true,
+      },
+    }),
     GraphQLModule.forRoot({
       autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
