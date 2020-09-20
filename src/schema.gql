@@ -59,6 +59,7 @@ type Feed {
   description: String
   feedType: String
   feedUrl: String
+  guid: String
   id: Int!
   link: String
   published: Boolean!
@@ -70,6 +71,7 @@ input FeedInput {
   description: String
   feedType: FeedType = NONE
   feedUrl: String
+  guid: String
   link: String
   published: Boolean = true
   title: String!

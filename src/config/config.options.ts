@@ -11,6 +11,7 @@ export const configOptions = {
     ENABLE_CORS: Joi.boolean().default(false),
     ENABLE_CSURF: Joi.boolean().default(false),
     ENABLE_HELMET: Joi.boolean().default(false),
+    ENABLE_LOGGER: Joi.boolean().default(true),
     ENABLE_RATELIMIT: Joi.boolean().default(false),
     RATELIMIT_WINDOW: Joi.number().default(15),
     RATELIMIT_MAX: Joi.number().default(100),

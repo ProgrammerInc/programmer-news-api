@@ -14,11 +14,13 @@ async function bootstrap() {
     {
       transport: Transport.REDIS,
       options: {
-        url: process.env.REDIS_URL || "redis://localhost:6379",
+        url: process.env.REDIS_URL || 'redis://localhost:6379',
       },
     },
   );
 
-  app.listen(() => logger.log('Programmer News Feed microservice is listening'));
+  app.listen(() =>
+    logger.log('Programmer News Feed microservice is listening'),
+  );
 }
 bootstrap();

@@ -18,6 +18,9 @@ export class FeedInput {
   @Field((_type) => FeedType, { defaultValue: FeedType.NONE })
   feedType: FeedType;
 
+  @Field({ nullable: true })
+  guid?: string;
+
   @Field({ defaultValue: true })
   published: boolean;
 }

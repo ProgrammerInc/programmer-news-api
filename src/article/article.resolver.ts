@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import {
   Args,
   Int,
@@ -30,7 +31,11 @@ export class ArticleResolver {
 
   @Mutation((_returns) => Article)
   async createArticle(
-    @Args({ name: 'article', type: () => ArticleInput }) article: ArticleInput,
+    @Args(
+      { name: 'article', type: () => ArticleInput },
+      new ValidationPipe({ transform: true }),
+    )
+    article: ArticleInput,
   ): Promise<Article> {
     return this.articleService.createArticle(article);
   }
@@ -38,7 +43,11 @@ export class ArticleResolver {
   @Mutation((_returns) => Article)
   async updateArticle(
     @Args('id', { type: () => Int }) id: number,
-    @Args({ name: 'article', type: () => ArticleInput }) article: ArticleInput,
+    @Args(
+      { name: 'article', type: () => ArticleInput },
+      new ValidationPipe({ transform: true }),
+    )
+    article: ArticleInput,
   ): Promise<Article> {
     return this.articleService.updateArticle({ where: { id }, data: article });
   }

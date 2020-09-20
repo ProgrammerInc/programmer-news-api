@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import {
   Args,
   Int,
@@ -30,7 +31,10 @@ export class CategoryResolver {
 
   @Mutation((_returns) => Category)
   async createCategory(
-    @Args({ name: 'category', type: () => CategoryInput })
+    @Args(
+      { name: 'category', type: () => CategoryInput },
+      new ValidationPipe({ transform: true }),
+    )
     category: CategoryInput,
   ): Promise<Category> {
     return this.categoryService.createCategory(category);
@@ -39,7 +43,10 @@ export class CategoryResolver {
   @Mutation((_returns) => Category)
   async updateCategory(
     @Args('id', { type: () => Int }) id: number,
-    @Args({ name: 'category', type: () => CategoryInput })
+    @Args(
+      { name: 'category', type: () => CategoryInput },
+      new ValidationPipe({ transform: true }),
+    )
     category: CategoryInput,
   ): Promise<Category> {
     return this.categoryService.updateCategory({

@@ -21,6 +21,9 @@ export class Feed {
   @Field({ nullable: true })
   feedType?: string;
 
+  @Field({ nullable: true })
+  guid?: string;
+
   @Field()
   published: boolean;
 

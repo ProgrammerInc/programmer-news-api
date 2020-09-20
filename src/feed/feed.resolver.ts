@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import {
   Args,
   Int,
@@ -30,7 +31,11 @@ export class FeedResolver {
 
   @Mutation((_returns) => Feed)
   async createFeed(
-    @Args({ name: 'feed', type: () => FeedInput }) feed: FeedInput,
+    @Args(
+      { name: 'feed', type: () => FeedInput },
+      new ValidationPipe({ transform: true }),
+    )
+    feed: FeedInput,
   ): Promise<Feed> {
     return this.feedService.createFeed(feed);
   }
@@ -38,7 +43,11 @@ export class FeedResolver {
   @Mutation((_returns) => Feed)
   async updateFeed(
     @Args('id', { type: () => Int }) id: number,
-    @Args({ name: 'feed', type: () => FeedInput }) feed: FeedInput,
+    @Args(
+      { name: 'feed', type: () => FeedInput },
+      new ValidationPipe({ transform: true }),
+    )
+    feed: FeedInput,
   ): Promise<Feed> {
     return this.feedService.updateFeed({ where: { id }, data: feed });
   }
