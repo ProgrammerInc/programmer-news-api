@@ -14,7 +14,7 @@ import { WorkerService } from './worker.service';
         NODE_ENV: Joi.string()
           .valid('development', 'production', 'test', 'provision')
           .default('development'),
-        PORT: Joi.number().default(4000),
+        WORKER_PORT: Joi.number().default(4000),
         DATABASE_URL: Joi.string().default('postgresql://postgres@localhost:5432/programmer-news?schema=public'),
         REDIS_URL: Joi.string().default('redis://localhost:6379'),
       }),

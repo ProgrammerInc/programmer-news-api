@@ -2,6 +2,7 @@ import * as Joi from '@hapi/joi';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import * as path from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -40,6 +41,11 @@ import { PrismaModule } from './prisma/prisma.module';
       installSubscriptionHandlers: true,
     }),
     PrismaModule,
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'docs'),
+      serveRoot: "/docs",
+      exclude: ['/graphql'],
+    }),
     ArticleModule,
     FeedModule,
   ],
