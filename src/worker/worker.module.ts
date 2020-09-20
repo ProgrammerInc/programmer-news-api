@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ArticleModule } from '../article/article.module';
+import { ArticleService } from '../article/article.service';
 import { configOptions } from '../config/config.options';
 import { FeedModule } from '../feed/feed.module';
 import { PrismaModule } from '../prisma/prisma.module';
@@ -15,6 +16,6 @@ import { WorkerService } from './worker.service';
     FeedModule,
   ],
   controllers: [WorkerController],
-  providers: [WorkerService],
+  providers: [WorkerService, ArticleService],
 })
 export class WorkerModule {}

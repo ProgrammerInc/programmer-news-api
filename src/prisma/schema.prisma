@@ -16,7 +16,7 @@ model Article {
   description   String?
   body          String?
   url           String?
-  published      Boolean   @default(true)
+  published     Boolean   @default(true)
   feed          Feed?     @relation(fields: [feedId], references: [id])
   feedId        Int?
   publishedAt   DateTime  @default(now())
@@ -30,7 +30,7 @@ model Feed {
   description   String?
   url           String?
   feedType      String?
-  published      Boolean   @default(true)
+  published     Boolean   @default(true)
   articles      Article[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
