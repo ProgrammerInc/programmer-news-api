@@ -5,8 +5,8 @@ export const configOptions = {
     NODE_ENV: Joi.string()
       .valid('development', 'production', 'test', 'provision')
       .default('development'),
-    PORT: Joi.number().default(3000),
-    WORKER_PORT: Joi.number().default(4000),
+    PORT: Joi.number().default(4000),
+    WORKER_PORT: Joi.number().default(7000),
     ENABLE_COMPRESSION: Joi.boolean().default(false),
     ENABLE_CORS: Joi.boolean().default(false),
     ENABLE_CSURF: Joi.boolean().default(false),
