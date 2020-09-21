@@ -1,5 +1,18 @@
 import { Injectable, Logger } from '@nestjs/common';
-import * as Parser from 'rss-parser';
+import metascraper from 'metascraper';
+import metaAuthor from 'metascraper-author';
+import metaClearbit from 'metascraper-clearbit';
+import metaDate from 'metascraper-date';
+import metaDescription from 'metascraper-description';
+import metaImage from 'metascraper-image';
+import metaLang from 'metascraper-lang';
+import metaLogo from 'metascraper-logo';
+import metaLogoFavicon from 'metascraper-logo-favicon';
+import metaPublisher from 'metascraper-publisher';
+import metaTitle from 'metascraper-title';
+import metaUrl from 'metascraper-url';
+import fetch from 'node-fetch';
+import Parser from 'rss-parser';
 import { Feed } from '../feed/models/feed.model';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -8,39 +21,76 @@ export class WorkerService {
   constructor(private prismaService: PrismaService) {}
 
   private readonly logger = new Logger(WorkerService.name);
+  private readonly scraper = metascraper([
+    metaAuthor(),
+    metaDate(),
+    metaDescription(),
+    metaImage(),
+    metaLang(),
+    metaLogo(),
+    metaClearbit(),
+    metaLogoFavicon(),
+    metaPublisher(),
+    metaTitle(),
+    metaUrl(),
+  ]);
 
   async feedCreated(data: Feed) {
     const parser = new Parser();
 
     const { id, link } = data;
-    const feed = await parser.parseURL(link);
 
-    this.logger.log(feed);
+    const response = await fetch(link);
+    const contentType = response.headers.get('content-type');
+    const isXML = contentType.startsWith('application/xml');
+    const isATOM = contentType.startsWith('application/atom+xml');
+    const isRSS = contentType.startsWith('application/rss+xml');
 
-    await this.prismaService.feed.update({
-      where: { id },
-      data: {
-        title: feed.title,
-        description: feed.description,
-        link: feed.link,
-        feedUrl: feed.feedUrl,
-      },
-    });
+    if (isATOM || isRSS || isXML) {
+      const body = await response.text();
+      const metadata = await this.scraper({ html: body, url: link });
 
-    feed.items.forEach(async (item) => {
-      this.logger.log(item);
+      this.logger.debug(metadata);
 
-      await this.prismaService.article.create({
+      const feed = await parser.parseURL(link);
+
+      await this.prismaService.feed.update({
+        where: { id },
         data: {
-          title: item.title,
-          author: item.author,
-          link: item.link,
-          guid: item.id,
-          publishedAt: item.pubDate,
-          feed: { connect: { id } },
+          title: feed.title || metadata.title,
+          description: feed.description || metadata.description,
+          author: metadata.author,
+          image: metadata.image,
+          publisher: metadata.publisher,
+          link: feed.link || metadata.url,
+          feedUrl: feed.feedUrl,
+          feedType: isATOM ? 'ATOM' : isRSS ? 'RSS' : 'NONE',
         },
       });
-    });
+
+      feed.items.forEach(async (item) => {
+        this.logger.debug(item);
+
+        const response = await fetch(item.link);
+        const body = await response.text();
+        const metadata = await this.scraper({ html: body, url: link });
+
+        await this.prismaService.article.create({
+          data: {
+            title: item.title || metadata.title,
+            description: metadata.description || item.contentSnippet,
+            content: item.content,
+            author: item.author || item.creator || metadata.author,
+            publisher: metadata.publisher,
+            link: item.link || metadata.url,
+            image: metadata.image,
+            guid: item.id,
+            publishedAt: item.pubDate || metadata.date,
+            feed: { connect: { id } },
+          },
+        });
+      });
+    }
   }
 
   async updateFeeds(data: Feed[]) {
@@ -53,28 +103,24 @@ export class WorkerService {
       const { id, link } = item;
       const feed = await parser.parseURL(link);
 
-      this.logger.log(feed);
-
-      await this.prismaService.feed.update({
-        where: { id },
-        data: {
-          title: feed.title,
-          description: feed.description,
-          link: feed.link,
-          feedUrl: feed.feedUrl,
-        },
-      });
-
       feed.items.forEach(async (item) => {
-        this.logger.log(item);
+        this.logger.debug(item);
+
+        const response = await fetch(item.link);
+        const body = await response.text();
+        const metadata = await this.scraper({ html: body, url: link });
 
         await this.prismaService.article.create({
           data: {
-            title: item.title,
-            author: item.author,
-            link: item.link,
+            title: item.title || metadata.title,
+            description: metadata.description || item.contentSnippet,
+            content: item.content,
+            author: item.author || item.creator || metadata.author,
+            publisher: metadata.publisher,
+            link: item.link || metadata.url,
+            image: metadata.image,
             guid: item.id,
-            publishedAt: item.pubDate,
+            publishedAt: item.pubDate || metadata.date,
             feed: { connect: { id } },
           },
         });

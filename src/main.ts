@@ -1,10 +1,10 @@
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import * as compression from 'compression';
-import * as csurf from 'csurf';
-import * as dotenv from 'dotenv';
-import * as rateLimit from 'express-rate-limit';
-import * as helmet from 'helmet';
+import compression from 'compression';
+import csurf from 'csurf';
+import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 
 dotenv.config();
@@ -24,7 +24,17 @@ async function bootstrap() {
   const enableCors = configService.get<boolean>('ENABLE_CORS');
 
   if (enableCors) {
-    app.enableCors();
+    const corsOrigin = configService.get<string>('CORS_ORGIN');
+
+    if (corsOrigin) {
+      app.enableCors({
+        origin: corsOrigin,
+      });
+    } else {
+      app.enableCors({
+        origin: true,
+      });
+    }
   }
 
   const enableCsurf = configService.get<boolean>('ENABLE_CSURF');

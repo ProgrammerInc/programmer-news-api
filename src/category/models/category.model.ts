@@ -13,6 +13,9 @@ export class Category {
   description?: string;
 
   @Field({ nullable: true })
+  image?: string;
+
+  @Field({ nullable: true })
   alias?: string;
 
   @Field({ defaultValue: true })

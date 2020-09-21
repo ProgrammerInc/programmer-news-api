@@ -20,7 +20,16 @@ export class Article {
   author?: string;
 
   @Field({ nullable: true })
-  link?: string;
+  image?: string;
+
+  @Field({ nullable: true })
+  logo?: string;
+
+  @Field({ nullable: true })
+  language?: string;
+
+  @Field()
+  link: string;
 
   @Field({ nullable: true })
   guid?: string;

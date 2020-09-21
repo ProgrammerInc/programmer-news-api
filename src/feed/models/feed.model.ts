@@ -6,14 +6,29 @@ export class Feed {
   @Field((_type) => Int)
   id: number;
 
-  @Field()
-  title: string;
+  @Field({ nullable: true })
+  title?: string;
+
+  @Field({ nullable: true })
+  alias?: string;
 
   @Field({ nullable: true })
   description?: string;
 
   @Field({ nullable: true })
-  link?: string;
+  author?: string;
+
+  @Field({ nullable: true })
+  image?: string;
+
+  @Field({ nullable: true })
+  logo?: string;
+
+  @Field({ nullable: true })
+  language?: string;
+
+  @Field()
+  link: string;
 
   @Field({ nullable: true })
   feedUrl?: string;
@@ -22,7 +37,7 @@ export class Feed {
   feedType?: string;
 
   @Field({ nullable: true })
-  guid?: string;
+  publisher?: string;
 
   @Field()
   published: boolean;

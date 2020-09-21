@@ -12,7 +12,10 @@ type Article {
   feedId: Int
   guid: String
   id: Int!
-  link: String
+  image: String
+  language: String
+  link: String!
+  logo: String
   published: Boolean!
   title: String!
   updatedAt: DateTime!
@@ -24,7 +27,10 @@ input ArticleInput {
   description: String
   feedId: Int!
   guid: String
-  link: String
+  image: String
+  language: String
+  link: String!
+  logo: String
   published: Boolean = true
   publishedAt: DateTime
   title: String!
@@ -36,6 +42,7 @@ type Category {
   createdAt: DateTime!
   description: String
   id: Int!
+  image: String
   name: String!
   published: Boolean!
   updatedAt: DateTime!
@@ -44,6 +51,7 @@ type Category {
 input CategoryInput {
   alias: String
   description: String
+  image: String
   name: String!
   published: Boolean = true
 }
@@ -54,27 +62,37 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Feed {
+  alias: String
   articles: [Article!]
+  author: String
   createdAt: DateTime!
   description: String
   feedType: String
   feedUrl: String
-  guid: String
   id: Int!
-  link: String
+  image: String
+  language: String
+  link: String!
+  logo: String
   published: Boolean!
-  title: String!
+  publisher: String
+  title: String
   updatedAt: DateTime!
 }
 
 input FeedInput {
+  alias: String
+  author: String
   description: String
   feedType: FeedType = NONE
   feedUrl: String
-  guid: String
+  image: String
+  language: String
   link: String
+  logo: String
   published: Boolean = true
-  title: String!
+  publisher: String
+  title: String
 }
 
 enum FeedType {
