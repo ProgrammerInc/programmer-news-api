@@ -257,7 +257,7 @@
       "model": "Article",
       "field": "publishedAt",
       "type": "DateTime",
-      "arity": "Required"
+      "arity": "Optional"
     },
     {
       "tag": "CreateDirective",

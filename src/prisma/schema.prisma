@@ -26,7 +26,7 @@ model Article {
   feed          Feed?     @relation(fields: [feedId], references: [id])
   feedId        Int?
   categories    Category[]
-  publishedAt   DateTime  @default(now())
+  publishedAt   DateTime? @default(now())
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }

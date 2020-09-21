@@ -32,12 +32,15 @@ export class ArticleInput {
   @Field({ nullable: true })
   guid?: string;
 
+  @Field({ nullable: true })
+  publisher?: string;
+
   @Field({ defaultValue: true })
   published: boolean;
 
-  @Field((_type) => Int)
-  feedId: number;
-
   @Field({ nullable: true })
   publishedAt?: Date;
+
+  @Field((_type) => Int)
+  feedId: number;
 }

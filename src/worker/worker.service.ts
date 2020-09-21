@@ -35,14 +35,22 @@ export class WorkerService {
     metaUrl(),
   ]);
 
-  async feedCreated(data: Feed) {
+  async feedCreated(data: Feed): Promise<void> {
     const parser = new Parser();
 
     const { id, link } = data;
 
     const response = await fetch(link);
+
+    this.logger.debug(response);
+
     const contentType = response.headers.get('content-type');
-    const isXML = contentType.startsWith('application/xml');
+
+    this.logger.debug(contentType);
+
+    const isXML =
+      contentType.startsWith('application/xml') ||
+      contentType.startsWith('text/xml');
     const isATOM = contentType.startsWith('application/atom+xml');
     const isRSS = contentType.startsWith('application/rss+xml');
 
@@ -63,13 +71,17 @@ export class WorkerService {
           image: metadata.image,
           publisher: metadata.publisher,
           link: feed.link || metadata.url,
-          feedUrl: feed.feedUrl,
+          feedUrl: feed.feedUrl || link,
           feedType: isATOM ? 'ATOM' : isRSS ? 'RSS' : 'NONE',
         },
       });
 
       feed.items.forEach(async (item) => {
-        this.logger.debug(item);
+        this.logger.debug({
+          ...item,
+          content: 'REDACTED',
+          contentSnippet: 'REDACTED',
+        }); // Too much printing. Save the terminal trees.
 
         const response = await fetch(item.link);
         const body = await response.text();
@@ -82,12 +94,12 @@ export class WorkerService {
             title: item.title || metadata.title,
             description: metadata.description || item.contentSnippet,
             content: item.content,
-            author: item.author || item.creator || metadata.author,
+            author: metadata.author || item.author || item.creator,
             publisher: metadata.publisher,
             link: item.link || metadata.url,
             image: metadata.image,
             guid: item.id,
-            publishedAt: item.pubDate || metadata.date,
+            publishedAt: new Date(item.pubDate) || new Date(metadata.date),
             feed: { connect: { id } },
           },
         });
@@ -95,7 +107,7 @@ export class WorkerService {
     }
   }
 
-  async updateFeeds(data: Feed[]) {
+  async updateFeeds(data: Feed[]): Promise<void> {
     const parser = new Parser();
 
     const feeds =
@@ -106,23 +118,29 @@ export class WorkerService {
       const feed = await parser.parseURL(link);
 
       feed.items.forEach(async (item) => {
-        this.logger.debug(item);
+        this.logger.debug({
+          ...item,
+          content: 'REDACTED',
+          contentSnippet: 'REDACTED',
+        }); // Too much printing. Save the terminal trees.
 
         const response = await fetch(item.link);
         const body = await response.text();
         const metadata = await this.scraper({ html: body, url: link });
+
+        this.logger.debug(metadata);
 
         await this.prismaService.article.create({
           data: {
             title: item.title || metadata.title,
             description: metadata.description || item.contentSnippet,
             content: item.content,
-            author: item.author || item.creator || metadata.author,
+            author: metadata.author || item.author || item.creator,
             publisher: metadata.publisher,
             link: item.link || metadata.url,
             image: metadata.image,
             guid: item.id,
-            publishedAt: item.pubDate || metadata.date,
+            publishedAt: new Date(item.pubDate) || new Date(metadata.date),
             feed: { connect: { id } },
           },
         });

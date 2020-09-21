@@ -40,8 +40,14 @@ export class Article {
   @Field((_type) => Int)
   feedId?: number;
 
+  @Field({ nullable: true })
+  publisher?: string;
+
   @Field()
   published: boolean;
+
+  @Field({ nullable: true })
+  publishedAt?: Date;
 
   @Field((_type) => [Category])
   categories?: Category[];

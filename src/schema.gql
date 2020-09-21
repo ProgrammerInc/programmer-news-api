@@ -17,6 +17,8 @@ type Article {
   link: String!
   logo: String
   published: Boolean!
+  publishedAt: DateTime
+  publisher: String
   title: String!
   updatedAt: DateTime!
 }
@@ -33,6 +35,7 @@ input ArticleInput {
   logo: String
   published: Boolean = true
   publishedAt: DateTime
+  publisher: String
   title: String!
 }
 
