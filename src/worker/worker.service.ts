@@ -73,7 +73,9 @@ export class WorkerService {
 
         const response = await fetch(item.link);
         const body = await response.text();
-        const metadata = await this.scraper({ html: body, url: link });
+        const metadata = await this.scraper({ html: body, url: item.link });
+
+        this.logger.debug(metadata);
 
         await this.prismaService.article.create({
           data: {
